@@ -15,11 +15,6 @@ const PostSchema = new Schema({
         contentType: String
     }
   },
-  text: {
-    type: String,
-    trim: true,
-    required: true
-  },
   timestamp: {
     type: Number,
     required: true

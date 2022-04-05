@@ -3,6 +3,9 @@ const express = require('express');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 const path = require('path');
+
+const GridFsStorage = require('multer-gridfs-storage')
+const Grid = require('gridfs-stream')
 const posts = require('./routes/postRoute');
 const users = require('./routes/userRoute');
 
@@ -11,7 +14,6 @@ const dbURI = process.env.DB_URI || require('./secrets').dbURI;
 
 const app = express();
 const port = process.env.PORT || 5000;
-
 
 
 // Enable CORS
@@ -28,7 +30,7 @@ app.use((req, res, next) => {
   return next();
 });
 
-mongoose
+const connection = mongoose
   .connect(
     dbURI,
     {
@@ -38,6 +40,9 @@ mongoose
   )
   .then(() => console.log('Connected to MongoDB'))
   .catch(err => console.log('Failed to connect to MongoDB', err));
+
+// const storage = new GridFsStorage({ db: connection });
+// const upload = multer({ storage });
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
