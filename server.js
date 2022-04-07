@@ -4,8 +4,6 @@ const logger = require('morgan');
 const mongoose = require('mongoose');
 const path = require('path');
 
-const GridFsStorage = require('multer-gridfs-storage')
-const Grid = require('gridfs-stream')
 const posts = require('./routes/postRoute');
 const users = require('./routes/userRoute');
 
@@ -30,19 +28,10 @@ app.use((req, res, next) => {
   return next();
 });
 
-const connection = mongoose
-  .connect(
-    dbURI,
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true 
-    }
-  )
+mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true } )
   .then(() => console.log('Connected to MongoDB'))
   .catch(err => console.log('Failed to connect to MongoDB', err));
 
-// const storage = new GridFsStorage({ db: connection });
-// const upload = multer({ storage });
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

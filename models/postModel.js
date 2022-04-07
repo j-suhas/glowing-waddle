@@ -4,7 +4,8 @@ const { Schema } = mongoose;
 
 const PostSchema = new Schema({
   authorId: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: 'User',
     required: true
   },
   image:{
@@ -18,6 +19,16 @@ const PostSchema = new Schema({
   timestamp: {
     type: Number,
     required: true
+  },
+  location: {
+    type: Object
+  },
+  fileURL:{
+    type: String,
+    required: true
+  },
+  fileId: {
+    type: mongoose.Schema.Types.ObjectId, 
   }
 });
 
