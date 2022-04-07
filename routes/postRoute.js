@@ -55,7 +55,7 @@ router.post("/:id/upload", upload.single("file"), async (req, res) => {
 
   try {
     if (req.file === undefined) return res.send("you must select a file.");
-    const imgUrl = `http://localhost:8080/file/${req.file.filename}`;
+    const imgUrl = `http://ec2-44-204-12-72.compute-1.amazonaws.com:8080/file/${req.file.filename}`;
     // return res.send(imgUrl);
     const user = await User.findById(id).exec();
     // console.log('user found: ', user)
